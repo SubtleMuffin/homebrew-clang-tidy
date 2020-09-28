@@ -1,7 +1,9 @@
-# homebrew-clang-tidy
+# homebrew formulas
+
+## clang-tidy
 
 To install:
 
 ```shell
-brew install subtlemuffin/homebrew/clang-tidy
+brew install subtlemuffin/formulas/clang-tidy
 ```
