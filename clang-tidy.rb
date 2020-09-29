@@ -31,6 +31,12 @@ class ClangTidy < Formula
     regex(%r{href=.*?/tag/llvmorg[._-]v?(\d+(?:\.\d+)+)}i)
   end
 
+  bottle do
+    root_url "https://github.com/subtlemuffin/fomulas/releases/tag/1.0.0"
+    cellar :any_skip_relocation
+    sha256 "e5c9059b8248f279242486ed60ca197e2f97183027df9c5b506c01817e59f536" => :big_sur
+  end
+
   depends_on "cmake" => :build
   depends_on "ninja" => :build
 
