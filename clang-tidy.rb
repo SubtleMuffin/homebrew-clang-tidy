@@ -37,6 +37,13 @@ class ClangTidy < Formula
     sha256 "e5c9059b8248f279242486ed60ca197e2f97183027df9c5b506c01817e59f536" => :big_sur
   end
 
+  bottle do
+    root_url "https://github.com/SubtleMuffin/homebrew-formulas/releases/download/10.0.1"
+    cellar :any_skip_relocation
+    rebuild 1
+    sha256 "74f1194d1ce9aa9fdd02edaa99352e46e4997e4cd82520d5b14f1b5e27a0f8dc" => :mojave
+  end
+  
   depends_on "cmake" => :build
   depends_on "ninja" => :build
 
