@@ -2,7 +2,7 @@
 
 ## clang-tidy
 
-To install from source:
+To install from source (recommended, most trustworthy):
 ```shell
 brew install subtlemuffin/formulas/clang-tidy --verbose --build-from-source
 ```
