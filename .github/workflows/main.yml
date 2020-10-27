@@ -11,12 +11,32 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Update Homebrew formula
-        uses: dawidd6/action-homebrew-bump-formula@v3
+      - name: Install brew 
+        run: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+
+      - name: Build bottles
+        run: brew install subtlemuffin/formulas/clang-tidy --verbose --build-bottle
+
+      - name: Bottle
+        run: brew bottle subtlemuffin/formulas/clang-tidy > temp.log
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_RELEASE }}
         with:
-          token: ${{secrets.TOKEN}}
-          tap: subtlemuffin/formulas
-          formula: clang-tidy
-          tag: ${{github.ref}}
-          revision: ${{github.sha}}
-          force: false # true
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN_RELEASE }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
+          asset_path: `head -1 temp.log`
+          asset_name: temp=`head -1 temp.log` && echo $temp | cut -c3-
+          asset_content_type: application/zip
