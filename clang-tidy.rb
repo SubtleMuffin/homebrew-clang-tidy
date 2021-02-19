@@ -7,22 +7,17 @@ class ClangTidy < Formula
   head "https://github.com/llvm/llvm-project.git"
 
   stable do
-    url "https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/llvm-10.0.1.src.tar.xz"
-    sha256 "c5d8e30b57cbded7128d78e5e8dad811bff97a8d471896812f57fa99ee82cdf3"
+    url "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/llvm-11.1.0.src.tar.xz"
+    sha256 "ce8508e318a01a63d4e8b3090ab2ded3c598a50258cc49e2625b9120d4c03ea5"
 
     resource "clang" do
-      url "https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/clang-10.0.1.src.tar.xz"
-      sha256 "f99afc382b88e622c689b6d96cadfa6241ef55dca90e87fc170352e12ddb2b24"
-    end
-
-    resource "libcxx" do
-      url "https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/libcxx-10.0.1.src.tar.xz"
-      sha256 "def674535f22f83131353b3c382ccebfef4ba6a35c488bdb76f10b68b25be86c"
+      url "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang-11.1.0.src.tar.xz"
+      sha256 "0a8288f065d1f57cb6d96da4d2965cbea32edc572aa972e466e954d17148558b"
     end
 
     resource "clang-tools-extra" do
-      url "https://github.com/llvm/llvm-project/releases/download/llvmorg-10.0.1/clang-tools-extra-10.0.1.src.tar.xz"
-      sha256 "d093782bcfcd0c3f496b67a5c2c997ab4b85816b62a7dd5b27026634ccf5c11a"
+      url "https://github.com/llvm/llvm-project/releases/download/llvmorg-11.1.0/clang-tools-extra-11.1.0.src.tar.xz"
+      sha256 "76707c249de7a9cde3456b960c9a36ed9bbde8e3642c01f0ef61a43d61e0c1a2"
     end
   end
 
@@ -32,27 +27,19 @@ class ClangTidy < Formula
   end
 
   bottle do
-    root_url "https://github.com/SubtleMuffin/homebrew-formulas/releases/download/10.0.1"
+    root_url "https://github.com/SubtleMuffin/homebrew-formulas/releases/download/11.1.0"
     cellar :any_skip_relocation
     sha256 "e5c9059b8248f279242486ed60ca197e2f97183027df9c5b506c01817e59f536" => :big_sur
   end
 
-  bottle do
-    root_url "https://github.com/SubtleMuffin/homebrew-formulas/releases/download/10.0.1"
-    cellar :any_skip_relocation
-    sha256 "74f1194d1ce9aa9fdd02edaa99352e46e4997e4cd82520d5b14f1b5e27a0f8dc" => :mojave
-  end
-  
   depends_on "cmake" => :build
   depends_on "ninja" => :build
 
   def install
     if build.head?
-      ln_s buildpath/"libcxx", buildpath/"llvm/projects/libcxx"
       ln_s buildpath/"clang", buildpath/"llvm/tools/clang"
       ln_s buildpath/"clang-tools-extra", buildpath/"llvm/tools/clang/tools/extra"
     else
-      (buildpath/"projects/libcxx").install resource("libcxx")
       (buildpath/"tools/clang").install resource("clang")
       (buildpath/"tools/clang/tools/extra").install resource("clang-tools-extra")
     end
