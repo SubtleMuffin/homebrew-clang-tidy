@@ -9,7 +9,7 @@ brew install subtlemuffin/formulas/clang-tidy --verbose --build-from-source
 
 To kindly contribute to this repo with building a bottle
 ```shell
-brew install subtlemuffin/formulas/clang-tidy --verbose --build-from-source --build-bottle
+brew install subtlemuffin/formulas/clang-tidy --verbose --build-bottle
 ```
 
 To install with built bottles (binaries), if you trust me
