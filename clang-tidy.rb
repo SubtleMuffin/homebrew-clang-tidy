@@ -28,8 +28,7 @@ class ClangTidy < Formula
 
   bottle do
     root_url "https://github.com/SubtleMuffin/homebrew-formulas/releases/download/11.1.0"
-    cellar :any_skip_relocation
-    sha256 "8c7e758bfbc647697118aed30d24b6488bc0e8f078d302649821256a7d9e2346" => :big_sur
+    sha256 cellar: :any_skipe_relocation, big_sur: "8c7e758bfbc647697118aed30d24b6488bc0e8f078d302649821256a7d9e2346"
   end
 
   depends_on "cmake" => :build
